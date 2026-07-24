@@ -1,0 +1,7 @@
+name = "beach-fallback"
+main = "src/index.js"
+compatibility_date = "2026-07-24"
+
+[[kv_namespaces]]
+binding = "STATUS_KV"
+id = "8a48c1ef21534ef99f333671346b4907"
