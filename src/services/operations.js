@@ -10,24 +10,57 @@
  *   - Manually overridden
  *
  * are made here.
- *
- * index.js should never contain business rules; it should only react to
- * the operating state returned by this service.
  */
+
+function isWithinSeason(config) {
+
+    if (!config.season.enabled) {
+        return true;
+    }
+
+    const today = new Date().toISOString().split("T")[0];
+
+    return (
+        today >= config.season.start &&
+        today <= config.season.end
+    );
+}
+
 export function determineOperatingMode(config) {
-    // Manual override always wins
-    if (config.operation?.mode === "maintenance") {
-        return "maintenance";
+
+    // Manual overrides always win.
+    switch (config.operation.mode) {
+
+        case "maintenance":
+            return {
+                mode: "maintenance",
+                reason: "Manual maintenance mode"
+            };
+
+        case "closed":
+            return {
+                mode: "closed",
+                reason: "Manually closed"
+            };
+
+        case "open":
+            return {
+                mode: "open",
+                reason: "Manually forced open"
+            };
     }
 
-    if (config.operation?.mode === "closed") {
-        return "closed";
+    // Automatic mode
+
+    if (!isWithinSeason(config)) {
+        return {
+            mode: "closed",
+            reason: "Outside beach season"
+        };
     }
 
-    if (config.operation?.mode === "open") {
-        return "open";
-    }
-
-    // Otherwise follow the automatic schedule
-    return "automatic";
+    return {
+        mode: "automatic",
+        reason: "Within beach season"
+    };
 }

@@ -31,9 +31,13 @@ export default {
         //
         // FORCE EVERYONE TO THE MAINTENANCE PAGE
         //
-        const mode = determineOperatingMode(CONFIG);
+        const operation = determineOperatingMode(CONFIG);
 
-        if (mode === "maintenance") {
+        if (operation.mode === "maintenance") {
+            return fetchFallback(request);
+        }
+
+        if (operation.mode === "closed") {
             return fetchFallback(request);
         }
 
