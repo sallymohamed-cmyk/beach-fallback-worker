@@ -1,3 +1,5 @@
+import { CONFIG } from "./config";
+
 async function sendTelegram(env, message) {
     try {
         await fetch(
@@ -21,13 +23,12 @@ async function sendTelegram(env, message) {
 export default {
     async fetch(request, env) {
 
-        const MAINTENANCE_MODE = false;
         const url = new URL(request.url);
 
         //
         // FORCE EVERYONE TO THE MAINTENANCE PAGE
         //
-        if (MAINTENANCE_MODE) {
+        if (CONFIG.maintenanceMode) {
             return fetchFallback(request);
         }
 
