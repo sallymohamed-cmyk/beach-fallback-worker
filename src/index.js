@@ -1,5 +1,8 @@
 import { CONFIG } from "./config";
 import { isBranchOpen } from "./services/hours";
+import { determineOperatingMode } from "./services/operations.js";
+
+
 async function sendTelegram(env, message) {
     try {
         await fetch(
@@ -28,7 +31,9 @@ export default {
         //
         // FORCE EVERYONE TO THE MAINTENANCE PAGE
         //
-        if (CONFIG.maintenanceMode) {
+        const mode = determineOperatingMode(CONFIG);
+
+        if (mode === "maintenance") {
             return fetchFallback(request);
         }
 
