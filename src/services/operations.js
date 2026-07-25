@@ -1,3 +1,5 @@
+import { isBranchOpen } from "./hours.js";
+
 /*
  * This service is the single source of truth for the Worker's operating state.
  *
@@ -56,6 +58,13 @@ export function determineOperatingMode(config) {
         return {
             mode: "closed",
             reason: "Outside beach season"
+        };
+    }
+
+    if (!isBranchOpen()) {
+        return {
+            mode: "closed",
+            reason: "Outside opening hours"
         };
     }
 

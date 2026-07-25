@@ -1,5 +1,4 @@
 import { CONFIG } from "./config";
-import { isBranchOpen } from "./services/hours";
 import { determineOperatingMode } from "./services/operations.js";
 
 
@@ -38,10 +37,6 @@ export default {
         }
 
         if (operation.mode === "closed") {
-            return fetchFallback(request);
-        }
-
-        if (!isBranchOpen()) {
             return fetchFallback(request);
         }
 
