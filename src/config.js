@@ -25,8 +25,10 @@ export const CONFIG = {
      */
 
     operation: {
-        mode: "automatic" //automatic or closed or open
+        mode: "maintenance" // automatic | open | closed | maintenance
     },
+
+    // Beach season (inclusive)
 
     season: {
         enabled: true,
@@ -34,10 +36,10 @@ export const CONFIG = {
         end: "2026-09-30"
     },
 
-    openingHours: {
+    hours: {
         enabled: true,
         timezone: "Africa/Cairo",
         open: "08:00",
-        close: "sunset"
+        close: "19:30"
     }
 };

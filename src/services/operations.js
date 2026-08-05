@@ -61,7 +61,7 @@ export function determineOperatingMode(config) {
         };
     }
 
-    if (!isBranchOpen()) {
+    if (!isBranchOpen(config)) {
         return {
             mode: "closed",
             reason: "Outside opening hours"
