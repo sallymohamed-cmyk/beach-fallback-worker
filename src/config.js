@@ -25,7 +25,7 @@ export const CONFIG = {
      */
 
     operation: {
-        mode: "maintenance" // automatic | open | closed | maintenance
+        mode: "automatic" // automatic | open | closed | maintenance
     },
 
     // Beach season (inclusive)
